@@ -1,0 +1,680 @@
+/* ==========================================================================
+   Mamsa Dhatu 3D Medical Visualizer - Stylesheet
+   Design System: Medical Dark Theme with Rich Aesthetics & Glassmorphism
+   ========================================================================== */
+
+:root {
+    --bg-dark: #070709;
+    --bg-panel: rgba(18, 18, 24, 0.85);
+    --bg-panel-border: rgba(230, 57, 70, 0.2);
+    --bg-card: rgba(26, 26, 36, 0.7);
+    
+    --accent-red: #E63946;
+    --accent-red-glow: rgba(230, 57, 70, 0.4);
+    --muscle-burgundy: #A81B2B;
+    --tendon-cream: #F4F1DE;
+    --gold-accent: #E0A96D;
+    
+    --text-primary: #F8F9FA;
+    --text-secondary: #ADB5BD;
+    --text-muted: #6C757D;
+    
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --sidebar-width: 320px;
+    --header-height: 70px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* App Outer Shell */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Header Navigation Bar */
+.top-nav {
+    height: var(--header-height);
+    background: rgba(10, 10, 14, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand .badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-accent);
+    font-weight: 600;
+}
+
+.brand h1 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+.brand h1 span {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--accent-red);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: none;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-red), var(--muscle-burgundy));
+    color: #fff;
+    box-shadow: 0 4px 14px var(--accent-red-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--accent-red-glow);
+}
+
+/* Main Workspace Layout */
+.main-layout {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - var(--header-height));
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar-left, .sidebar-right {
+    width: var(--sidebar-width);
+    background: var(--bg-panel);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.sidebar-right {
+    border-right: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Panel Containers */
+.panel {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.panel-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.panel-header h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+/* View Selector Buttons */
+.view-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.view-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.view-btn .icon {
+    font-size: 1.2rem;
+}
+
+.view-btn .text strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.view-btn .text small {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.view-btn:hover {
+    background: rgba(230, 57, 70, 0.1);
+    border-color: rgba(230, 57, 70, 0.4);
+}
+
+.view-btn.active {
+    background: linear-gradient(90deg, rgba(230, 57, 70, 0.2), rgba(168, 27, 43, 0.1));
+    border-color: var(--accent-red);
+    box-shadow: 0 0 12px rgba(230, 57, 70, 0.2);
+}
+
+.view-btn.active .text strong {
+    color: var(--accent-red);
+}
+
+/* Mode Switches & Toggles */
+.mode-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.toggle-option input {
+    display: none;
+}
+
+.custom-toggle {
+    width: 34px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.custom-toggle::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-option input:checked + .custom-toggle {
+    background: var(--accent-red);
+}
+
+.toggle-option input:checked + .custom-toggle::after {
+    transform: translateX(16px);
+}
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.control-group label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent-red);
+    background: rgba(255, 255, 255, 0.1);
+    height: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/* Viewport Canvas Area */
+.viewport-area {
+    flex: 1;
+    background: #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: 
+        radial-gradient(circle at center, rgba(230, 57, 70, 0.05) 0%, transparent 70%),
+        radial-gradient(circle at 50% 100%, rgba(20, 20, 28, 0.8) 0%, #000 100%);
+}
+
+.viewport-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.render-frame {
+    position: relative;
+    max-height: 94%;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.render-img {
+    max-height: calc(100vh - 120px);
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    filter: contrast(115%) saturate(110%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.view-tag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+/* Split View Adjustments */
+.viewport-container.split-view .render-frame {
+    max-width: 46%;
+}
+
+.render-frame.hidden {
+    display: none;
+}
+
+/* Hotspots Overlay */
+.hotspots-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hotspot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.3), 0 0 15px var(--accent-red);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.25s ease;
+}
+
+.hotspot::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--accent-red);
+    border-radius: 50%;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.hotspot:hover, .hotspot.active {
+    background: #fff;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.4), 0 0 25px var(--accent-red);
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
+.hotspot-tooltip {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 15, 22, 0.92);
+    border: 1px solid var(--accent-red);
+    backdrop-filter: blur(10px);
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.hotspot:hover .hotspot-tooltip {
+    opacity: 1;
+}
+
+/* Floating Toolbar */
+.canvas-floating-toolbar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 18, 24, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 20;
+}
+
+.tool-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.canvas-floating-toolbar .separator {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Microscope Fiber Magnifier Lens */
+.magnifier-lens {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-red);
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    display: none;
+    background-repeat: no-repeat;
+    z-index: 30;
+}
+
+/* Right Sidebar Muscle Details */
+.muscle-detail-panel {
+    border-left: 3px solid var(--accent-red);
+}
+
+.category-badge {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: var(--accent-red);
+    font-weight: 700;
+}
+
+.muscle-detail-panel h2 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    margin-top: 4px;
+    color: var(--text-primary);
+}
+
+.muscle-description {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.stat-card small {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    margin-top: 2px;
+}
+
+.ayurveda-insight-box {
+    background: rgba(224, 169, 109, 0.08);
+    border: 1px solid rgba(224, 169, 109, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.ayurveda-insight-box h4 {
+    font-size: 0.82rem;
+    color: var(--gold-accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ayurveda-insight-box p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+/* Dhatu Quick Ref List */
+.attribute-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.attribute-list li {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    padding-bottom: 6px;
+}
+
+.attribute-list li strong {
+    color: var(--text-primary);
+}
+
+/* Modal Window */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-card {
+    background: #101018;
+    border: 1px solid var(--accent-red);
+    width: 600px;
+    max-width: 90vw;
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(230, 57, 70, 0.25);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: rgba(230, 57, 70, 0.1);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    color: var(--accent-red);
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-section h3 {
+    font-size: 0.95rem;
+    color: var(--gold-accent);
+    margin-bottom: 6px;
+}
+
+.modal-section p, .modal-section ul {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.modal-section ul {
+    padding-left: 20px;
+    margin-top: 6px;
+}

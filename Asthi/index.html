@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asthi Dhatu — 3D Medical & Ayurvedic Human Skeletal Visualization</title>
+    <meta name="description" content="Interactive 3D medical anatomical visualization of Asthi Dhatu (Human Skeletal System & Bone Tissue) featuring anterior and posterior views, anatomical hotspot inspection, and Ayurvedic medical commentary.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-badge">ASTHI DHATU</div>
+                <h1>3D Skeletal Anatomy & Medical Visualization</h1>
+            </div>
+            <div class="header-controls">
+                <div class="view-switcher" role="tablist" aria-label="Anatomical View Selection">
+                    <button class="view-btn active" id="btn-front" role="tab" aria-selected="true" onclick="switchView('front')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        Anterior (Front View)
+                    </button>
+                    <button class="view-btn" id="btn-back" role="tab" aria-selected="false" onclick="switchView('back')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a6 6 0 1 0 6 6 6 6 0 0 0-6-6z"/></svg>
+                        Posterior (Back View)
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-workspace">
+            <!-- Left Sidebar Controls & Layer Render Modes -->
+            <aside class="sidebar-left">
+                <div class="card panel-controls">
+                    <h3>Visual Render Modes</h3>
+                    <p class="panel-desc">Adjust lighting & tissue visualization filters</p>
+                    <div class="mode-buttons">
+                        <button class="mode-btn active" data-mode="natural" onclick="setRenderMode('natural')">
+                            <span class="dot gold"></span> Realistic Bone Material
+                        </button>
+                        <button class="mode-btn" data-mode="xray" onclick="setRenderMode('xray')">
+                            <span class="dot cyan"></span> Radiographic / X-Ray
+                        </button>
+                        <button class="mode-btn" data-mode="bone-focus" onclick="setRenderMode('bone-focus')">
+                            <span class="dot white"></span> High-Contrast Cortical Bone
+                        </button>
+                        <button class="mode-btn" data-mode="marrow" onclick="setRenderMode('marrow')">
+                            <span class="dot red"></span> Marrow & Trabecular Focus
+                        </button>
+                    </div>
+
+                    <div class="slider-group">
+                        <label for="zoom-range">Viewport Zoom Level: <span id="zoom-val">100%</span></label>
+                        <input type="range" id="zoom-range" min="100" max="300" value="100" oninput="handleZoomSlider(this.value)">
+                    </div>
+
+                    <div class="viewport-actions">
+                        <button class="action-btn" onclick="resetViewport()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                            Reset View
+                        </button>
+                        <button class="action-btn" id="btn-hotspots" onclick="toggleHotspots()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            Toggle Hotspots
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Anatomical Region Navigation -->
+                <div class="card panel-regions">
+                    <h3>Anatomical Structure Regions</h3>
+                    <div class="region-list">
+                        <button class="region-item" onclick="focusRegion('skull')">
+                            <span class="region-icon">💀</span>
+                            <div class="region-info">
+                                <strong>Cranium & Facial Skeleton</strong>
+                                <small>Skull, Mandible, Sutures</small>
+                            </div>
+                        </button>
+                        <button class="region-item" onclick="focusRegion('spine')">
+                            <span class="region-icon">🦴</span>
+                            <div class="region-info">
+                                <strong>Vertebral Column</strong>
+                                <small>Cervical, Thoracic, Lumbar, Sacrum</small>
+                            </div>
+                        </button>
+                        <button class="region-item" onclick="focusRegion('thorax')">
+                            <span class="region-icon">🫁</span>
+                            <div class="region-info">
+                                <strong>Thoracic Cage</strong>
+                                <small>Ribs, Sternum, Costal Cartilage</small>
+                            </div>
+                        </button>
+                        <button class="region-item" onclick="focusRegion('pelvis')">
+                            <span class="region-icon">🏛️</span>
+                            <div class="region-info">
+                                <strong>Pelvis & Girdle</strong>
+                                <small>Ilium, Ischium, Pubis, Acetabulum</small>
+                            </div>
+                        </button>
+                        <button class="region-item" onclick="focusRegion('limbs')">
+                            <span class="region-icon">🦵</span>
+                            <div class="region-info">
+                                <strong>Appendicular Bones</strong>
+                                <small>Femur, Humerus, Tibia, Radius</small>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Viewport -->
+            <section class="viewport-section">
+                <div class="viewport-wrapper" id="viewport-container">
+                    <div class="viewport-canvas-wrapper" id="canvas-wrapper">
+                        <img id="main-render" src="asthi_dhatu_front.png" alt="Asthi Dhatu 3D Medical Visualisation" class="render-img natural">
+                        <div id="hotspot-layer" class="hotspot-layer"></div>
+                    </div>
+                    <div class="viewport-watermark-overlay">
+                        <span>ASTHI DHATU (ASTHI SKELETAL SYSTEM)</span>
+                        <span id="view-indicator">ANTERIOR VIEW</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Sidebar Medical & Ayurvedic Information Panel -->
+            <aside class="sidebar-right">
+                <div class="card panel-info">
+                    <div class="tab-header">
+                        <button class="tab-btn active" onclick="switchInfoTab('ayurveda')">Ayurvedic Principles</button>
+                        <button class="tab-btn" onclick="switchInfoTab('anatomy')">Modern Anatomy</button>
+                    </div>
+
+                    <!-- Ayurvedic Content Tab -->
+                    <div id="tab-ayurveda" class="tab-content active">
+                        <div class="info-block">
+                            <div class="info-tag">5TH DHATU</div>
+                            <h2>Asthi Dhatu (Bone Tissue)</h2>
+                            <p class="summary-text">
+                                In Ayurvedic Physiology, <strong>Asthi Dhatu</strong> represents the solid structural scaffolding of the body. It provides rigidity, stability, protects vital visceral organs (Prana Ayatana), and supports muscular attachments (Mamsa Dhatu).
+                            </p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h4>🔑 Key Ayurvedic Attributes</h4>
+                            <ul>
+                                <li><strong>Mahabhuta Dominance:</strong> Prithvi (Earth - solidity) & Vayu (Air - porosity/cavities).</li>
+                                <li><strong>Upadhatu (Secondary Tissues):</strong> Danta (Teeth).</li>
+                                <li><strong>Mala (Excretory Products):</strong> Nakha (Nails) & Kesha/Loma (Hair).</li>
+                                <li><strong>Asthivaha Srotas:</strong> Channels originating from Medo Dhatu (adipose tissue) & Jaghana (pelvic region).</li>
+                                <li><strong>Associated Dhatu:</strong> Majja Dhatu (Bone Marrow), contained directly within Asthi cavities.</li>
+                            </ul>
+                        </div>
+
+                        <div class="detail-card highlight-card">
+                            <h4>🌿 Functional Purpose (Karma)</h4>
+                            <p><em>"Dharanam Asthnam Karma"</em> — The fundamental function of Asthi Dhatu is <strong>Dharana</strong> (supporting and sustaining the body's posture, weight, and internal organs against gravity).</p>
+                        </div>
+                    </div>
+
+                    <!-- Modern Anatomy Tab -->
+                    <div id="tab-anatomy" class="tab-content">
+                        <div class="info-block">
+                            <div class="info-tag">SKELETAL SYSTEM</div>
+                            <h2 id="structure-title">Human Adult Skeleton</h2>
+                            <p class="summary-text" id="structure-desc">
+                                Comprising 206 distinct articulated bones, the skeleton forms the axial and appendicular framework of the human body, providing cortical protection, leverage for locomotion, and hematopoiesis.
+                            </p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h4>🔬 Histological & Material Composition</h4>
+                            <ul>
+                                <li><strong>Cortical (Compact) Bone:</strong> Dense outer ivory shell giving mechanical strength & rigidity.</li>
+                                <li><strong>Trabecular (Cancellous) Bone:</strong> Porous internal honeycombed lattice distributing load forces.</li>
+                                <li><strong>Bone Matrix:</strong> 65% Inorganic mineral hydroxyapatite [Ca10(PO4)6(OH)2], 35% Organic Type I Collagen fibres.</li>
+                                <li><strong>Articular Cartilage:</strong> Smooth hyaline cartilage covering joint articulation heads.</li>
+                            </ul>
+                        </div>
+
+                        <div id="dynamic-structure-details" class="detail-card focus-details">
+                            <h4>📌 Selected Structure Details</h4>
+                            <div id="hotspot-detail-content">
+                                <p class="hint-text">Click any hotspot marker on the 3D model or select a structure from the left sidebar to view pinpoint anatomical data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+</body>
+</html>

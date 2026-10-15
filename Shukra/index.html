@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shukra Dhatu - 3D Anatomical & Ayurvedic Reproductive Essence Visualization</title>
+    <meta name="description" content="Interactive 3D medical visualization of Shukra Dhatu (Ayurvedic Reproductive System & Essence), featuring high-definition front and back anatomical renders, structure inspection, srotas pathway simulation, and clinical insights.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Header -->
+        <header class="main-header">
+            <div class="header-brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="9" stroke="url(#brandGrad)"/>
+                        <path d="M12 6v12M6 12h12" stroke="url(#brandGrad)"/>
+                        <circle cx="12" cy="12" r="3" fill="url(#brandGrad)"/>
+                        <defs>
+                            <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#fff5db"/>
+                                <stop offset="50%" stop-color="#e2c992"/>
+                                <stop offset="100%" stop-color="#ab8d4e"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>SHUKRA DHATU</h1>
+                    <span class="subtitle">Reproductive Tissue & Vital Essence Visualizer</span>
+                </div>
+            </div>
+
+            <!-- View Switcher -->
+            <div class="view-controls">
+                <div class="toggle-group" id="viewToggleGroup">
+                    <button class="toggle-btn active" id="btnFrontView" data-view="front">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4"/>
+                        </svg>
+                        Anterior View (Front)
+                    </button>
+                    <button class="toggle-btn" id="btnBackView" data-view="back">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20V4M16 16l-4 4-4-4M16 8l-4-4-4 4"/>
+                        </svg>
+                        Posterior View (Back)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Action Tools -->
+            <div class="header-actions">
+                <button class="icon-btn" id="btnResetView" title="Reset Camera Zoom & Pan">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="btnToggleMagnifier" title="Toggle Magnifier Lens">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                        <path d="M11 8v6M8 11h6"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="btnToggleFlow" title="Toggle Essence Flow Simulation">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Tool Panel: Visual Layer & Search Controls -->
+            <aside class="sidebar left-sidebar">
+                <div class="panel-section">
+                    <h2 class="section-title">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Anatomical Layers
+                    </h2>
+                    <div class="layer-controls">
+                        <label class="layer-checkbox active">
+                            <input type="checkbox" id="layerShukra" checked>
+                            <span class="custom-check"></span>
+                            <span class="layer-label">
+                                <strong>Shukra Dhatu Essence</strong>
+                                <small>Pearlescent Luminescent Reproductive Organs</small>
+                            </span>
+                            <span class="color-indicator shukra-color"></span>
+                        </label>
+
+                        <label class="layer-checkbox active">
+                            <input type="checkbox" id="layerSkeletal" checked>
+                            <span class="custom-check"></span>
+                            <span class="layer-label">
+                                <strong>Osteo-Pelvic Skeleton</strong>
+                                <small>Ivory Cortical Bones & Pelvic Ring</small>
+                            </span>
+                            <span class="color-indicator skeletal-color"></span>
+                        </label>
+
+                        <label class="layer-checkbox active">
+                            <input type="checkbox" id="layerVascular" checked>
+                            <span class="custom-check"></span>
+                            <span class="layer-label">
+                                <strong>Vascular & Neural Plexus</strong>
+                                <small>Testicular Arteries, Veins & Nerves</small>
+                            </span>
+                            <span class="color-indicator vascular-color"></span>
+                        </label>
+
+                        <label class="layer-checkbox active">
+                            <input type="checkbox" id="layerSrotasFlow" checked>
+                            <span class="custom-check"></span>
+                            <span class="layer-label">
+                                <strong>Srotas Essence Flow</strong>
+                                <small>Microscopic Fluid & Spermatic Movement</small>
+                            </span>
+                            <span class="color-indicator flow-color"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2 class="section-title">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        Structure Index
+                    </h2>
+                    <div class="search-box">
+                        <input type="text" id="structureSearch" placeholder="Search organs, ducts, or Ayurvedic terms...">
+                    </div>
+                    <div class="structure-list" id="structureList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="panel-section stats-card">
+                    <div class="stat-item">
+                        <span class="stat-number">7<sup>th</sup></span>
+                        <span class="stat-label">Final Dhatu (Saptadhatu)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Saumya</span>
+                        <span class="stat-label">Cooling / Water-Earth Quality</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Viewport / Canvas Container -->
+            <section class="viewport-container" id="viewportContainer">
+                <div class="viewport-canvas-wrapper" id="canvasWrapper">
+                    <!-- Base HD Renders -->
+                    <img src="assets/shukra_dhatu_front.png" alt="Shukra Dhatu Front View 3D Specimen" id="imgFront" class="specimen-img active">
+                    <img src="assets/shukra_dhatu_back.png" alt="Shukra Dhatu Back View 3D Specimen" id="imgBack" class="specimen-img">
+
+                    <!-- Interactive Canvas Overlay (Particle flow, glow overlays, magnifier lens) -->
+                    <canvas id="flowCanvas"></canvas>
+                    <canvas id="magnifierCanvas"></canvas>
+
+                    <!-- Dynamic SVG Hotspot Overlay -->
+                    <svg id="hotspotSvg" class="hotspot-overlay" viewBox="0 0 1000 1500" preserveAspectRatio="xMidYMid meet">
+                        <!-- Hotspots dynamically populated or rendered via JS -->
+                    </svg>
+
+                    <!-- Viewport On-Screen HUD Overlay -->
+                    <div class="viewport-hud">
+                        <div class="hud-badge" id="hudViewBadge">Anterior View (Front)</div>
+                        <div class="hud-zoom-indicator" id="hudZoomIndicator">Zoom: 100%</div>
+                    </div>
+
+                    <!-- Floating Lens Cursor Indicator -->
+                    <div class="lens-indicator" id="lensIndicator"></div>
+                </div>
+
+                <!-- Canvas Control Bar -->
+                <div class="canvas-toolbar">
+                    <button class="tool-btn" id="btnZoomIn" title="Zoom In">+</button>
+                    <button class="tool-btn" id="btnZoomOut" title="Zoom Out">&minus;</button>
+                    <button class="tool-btn" id="btnFit" title="Fit to View">Fit</button>
+                    <div class="toolbar-divider"></div>
+                    <button class="tool-btn active" id="btnHotspotsToggle" title="Toggle Hotspots">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <circle cx="12" cy="12" r="5"/>
+                        </svg>
+                        Hotspots
+                    </button>
+                    <button class="tool-btn" id="btnXrayToggle" title="X-Ray Organ Glow">X-Ray Glow</button>
+                </div>
+            </section>
+
+            <!-- Right Inspector & Educational Content Sidebar -->
+            <aside class="sidebar right-sidebar" id="inspectorSidebar">
+                <!-- Tab Controls -->
+                <div class="tab-header">
+                    <button class="tab-btn active" data-tab="inspectorTab">Structure Inspector</button>
+                    <button class="tab-btn" data-tab="ayurvedaTab">Ayurvedic Principles</button>
+                    <button class="tab-btn" data-tab="clinicalTab">Clinical & Pathophysiology</button>
+                </div>
+
+                <div class="tab-content active" id="inspectorTab">
+                    <div id="inspectorEmpty" class="empty-state">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                        </div>
+                        <h3>Select an Anatomical Structure</h3>
+                        <p>Click on any highlighted organ, duct, or bone in the pelvic viewport to inspect detailed 3D anatomy, histological characteristics, and Ayurvedic functions.</p>
+                    </div>
+
+                    <div id="inspectorDetails" class="inspector-details hidden">
+                        <div class="detail-header">
+                            <span class="detail-category" id="detailCategory">Reproductive System</span>
+                            <h2 class="detail-title" id="detailTitle">Testes (Vrishana)</h2>
+                            <div class="detail-sanskrit" id="detailSanskrit">वृषण (Vrishana)</div>
+                        </div>
+
+                        <div class="detail-badge-group">
+                            <span class="badge badge-gold" id="detailType">Primary Sex Organ</span>
+                            <span class="badge badge-blue" id="detailLocation">Scrotal Sac / Pelvic Origin</span>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>3D Anatomical Architecture</h4>
+                            <p id="detailAnatomyDesc">Pair of ovoid glandular organs enclosed within the scrotum. Surrounded by tunica vaginalis and tunica albuginea. Contains 200–300 lobules housing tightly coiled seminiferous tubules responsible for spermatogenesis.</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Shukra Dhatu Integration</h4>
+                            <p id="detailShukraDesc">Primary locus of Shukra Dhatu production (Shukra-Vaha Srotas Mula). Transforms precursor Dhatus (Majja & Rasa) into refined reproductive seeds and vital hormones.</p>
+                        </div>
+
+                        <div class="detail-grid">
+                            <div class="grid-card">
+                                <span class="card-label">Primary Secretion</span>
+                                <span class="card-value" id="detailSecretion">Sperm Cells & Testosterone</span>
+                            </div>
+                            <div class="grid-card">
+                                <span class="card-label">Channel (Srotas)</span>
+                                <span class="card-value" id="detailSrotas">Shukravaha Srotas</span>
+                            </div>
+                            <div class="grid-card">
+                                <span class="card-label">Physical Quality</span>
+                                <span class="card-value" id="detailQuality">Viscous, Ivory-Pearlescent</span>
+                            </div>
+                            <div class="grid-card">
+                                <span class="card-label">Associated Nerve/Vessel</span>
+                                <span class="card-value" id="detailVessels">Testicular Artery & Pampiniform Plexus</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Histological & Duct Path</h4>
+                            <ul class="detail-list" id="detailDuctPath">
+                                <li>Seminiferous Tubules &rarr; Rete Testis</li>
+                                <li>Efferent Ductules &rarr; Head of Epididymis</li>
+                                <li>Capillary exchange via Pampiniform venous plexus for temperature regulation (34°C)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayurvedic Tab Content -->
+                <div class="tab-content" id="ayurvedaTab">
+                    <div class="ayur-card">
+                        <div class="ayur-header">
+                            <span class="ayur-tag">Fundamental Concept</span>
+                            <h3>What is Shukra Dhatu?</h3>
+                        </div>
+                        <p>In Ayurvedic Physiology (Sharira Kriya), <strong>Shukra Dhatu</strong> is the seventh and final tissue layer formed through the metabolic transformation chain (Dhatu Parinama):</p>
+                        <div class="dhatu-chain">
+                            <span class="d-step">Rasa</span> &rarr;
+                            <span class="d-step">Rakta</span> &rarr;
+                            <span class="d-step">Mamsa</span> &rarr;
+                            <span class="d-step">Meda</span> &rarr;
+                            <span class="d-step">Asthi</span> &rarr;
+                            <span class="d-step">Majja</span> &rarr;
+                            <span class="d-step highlight">SHUKRA</span>
+                        </div>
+                        <p>It represents the essence of all organs, controlling reproduction, vitality, courage, aura, and ultimate immunity (Ojas).</p>
+                    </div>
+
+                    <div class="ayur-card">
+                        <h3>Qualities of Pure Shukra (Shuddha Shukra Lakshana)</h3>
+                        <blockquote class="sanskrit-quote">
+                            "Sphatikabham Dravam Snigdham Madhuram Madhugandhi Cha |<br>
+                            Shukram Ichanti Eke Shuddham Thailakshaudranibham Tathaa ||"
+                            <cite>— Charaka Samhita, Chikitsa Sthana</cite>
+                        </blockquote>
+                        <ul class="gunas-list">
+                            <li><strong>Sphatika-sankasha:</strong> Clear, crystalline, pearlescent white glow.</li>
+                            <li><strong>Snigdha & Dravam:</strong> Smooth, unctuous, fluidly viscous.</li>
+                            <li><strong>Madhura:</strong> Sweet in metabolic taste and post-digestive outcome.</li>
+                            <li><strong>Madhugandhi:</strong> Characteristic natural aroma.</li>
+                            <li><strong>Bahula:</strong> Abundant, dense in reproductive nutrients.</li>
+                        </ul>
+                    </div>
+
+                    <div class="ayur-card">
+                        <h3>Shukravaha Srotas (Reproductive Channel System)</h3>
+                        <table class="ayur-table">
+                            <tr>
+                                <th>Component</th>
+                                <th>Anatomical Equivalent</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Mula (Roots)</strong></td>
+                                <td>Vrishana (Testes) & Shepha / Pelvic Plexus</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Marga (Passages)</strong></td>
+                                <td>Vas Deferens, Ejaculatory Ducts, Urethra</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Karma (Function)</strong></td>
+                                <td>Garbhadhana (Conception), Dhairya (Courage), Preeti (Affection)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Clinical Tab Content -->
+                <div class="tab-content" id="clinicalTab">
+                    <div class="clinical-card warning">
+                        <h3>Shukra Kshaya (Deficiency Symptoms)</h3>
+                        <ul>
+                            <li>General fatigue, physical weakness, loss of muscular stamina.</li>
+                            <li>Dryness of mouth, joint stiffness, reduced vitality and drive.</li>
+                            <li>Oligospermia, low testosterone signs, erectile insufficiency.</li>
+                            <li>Premature aging signs due to diminished Ojas generation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="clinical-card info">
+                        <h3>Shukra Vriddhi (Excess & Congestion)</h3>
+                        <ul>
+                            <li>Hyper-secretion of seminal fluid, prostatic fullness.</li>
+                            <li>Increased libido without emotional balance, pelvic heaviness.</li>
+                            <li>Risk of prostatic hypertrophy or seminal vesicle distension.</li>
+                        </ul>
+                    </div>
+
+                    <div class="clinical-card success">
+                        <h3>Vajikarana & Rasayana Formulations</h3>
+                        <div class="herb-pills">
+                            <span class="herb-pill">Ashwagandha</span>
+                            <span class="herb-pill">Kapikacchu</span>
+                            <span class="herb-pill">Shatavari</span>
+                            <span class="herb-pill">Gokshura</span>
+                            <span class="herb-pill">Shilajit</span>
+                            <span class="herb-pill">Safed Musli</span>
+                            <span class="herb-pill">Swarna Bhasma</span>
+                        </div>
+                        <p class="herb-note">These herbs act directly on the Shukra-Agni (tissue fire) to enhance spermatogenesis, nourish seminal fluid, and fortify pelvic vascular flow.</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Footer Bar -->
+        <footer class="main-footer">
+            <div class="footer-info">
+                <span>Shukra Dhatu 3D Medical Visualization</span>
+                <span class="dot">&bull;</span>
+                <span>Anatomical Precision & Ayurvedic Physiology</span>
+            </div>
+            <div class="footer-legend">
+                <span class="legend-item"><span class="leg-color shukra"></span> Shukra Organs</span>
+                <span class="legend-item"><span class="leg-color duct"></span> Vas Deferens & Ducts</span>
+                <span class="legend-item"><span class="leg-color prostate"></span> Prostate & Vesicles</span>
+                <span class="legend-item"><span class="leg-color bone"></span> Pelvic Bones</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

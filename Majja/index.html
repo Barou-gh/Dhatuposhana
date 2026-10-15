@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Majja Dhatu — 3D Medical & Ayurvedic Anatomical Visualization</title>
+  <meta name="description" content="High-resolution 3D medical visualization of Majja Dhatu representing bone marrow architecture and secondary neural structures inside human skeletal framework.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lucide icons via unpkg -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header Navbar -->
+    <header>
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i data-lucide="bone" style="color: #ffffff; width: 20px; height: 20px;"></i>
+        </div>
+        <div class="logo-text">
+          <h1>MAJJA DHATU 3D</h1>
+          <p>Ayurvedic & Medical Anatomy Suite</p>
+        </div>
+      </div>
+
+      <!-- Viewpoint Controls (Front / Back) -->
+      <div class="view-controls">
+        <button id="btn-front-view" class="btn-toggle-view active" onclick="switchView('front')">
+          <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+          Anterior (Front View)
+        </button>
+        <button id="btn-back-view" class="btn-toggle-view" onclick="switchView('back')">
+          <i data-lucide="rotate-3d" style="width: 14px; height: 14px;"></i>
+          Posterior (Back View)
+        </button>
+      </div>
+
+      <div class="header-badges">
+        <span class="badge badge-red">
+          <i data-lucide="droplet" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+          Primary: Bone Marrow
+        </span>
+        <span class="badge badge-gold">
+          <i data-lucide="zap" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+          Secondary: Neural System
+        </span>
+      </div>
+    </header>
+
+    <!-- Left Sidebar: Layer & Visualization Controls -->
+    <aside class="sidebar-left">
+      <!-- Layer Control Section -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span>Anatomical Layers</span>
+          <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
+        </div>
+        <div class="layer-toggle-list">
+          <div class="layer-item">
+            <div class="layer-info">
+              <span class="layer-dot dot-marrow"></span>
+              <span class="layer-name">Bone Marrow (Majja)</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-marrow" checked onchange="updateCanvasFilters()">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <span class="layer-dot dot-neural"></span>
+              <span class="layer-name">Neural Pathways</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-neural" checked onchange="updateCanvasFilters()">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <span class="layer-dot dot-skeleton"></span>
+              <span class="layer-name">Cortical Skeleton</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-skeleton" checked onchange="updateCanvasFilters()">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Transparency Cutaway Slider -->
+        <div class="range-group">
+          <div class="range-label">
+            <span>Cortical Translucency (Cutaway)</span>
+            <span id="val-transparency">70%</span>
+          </div>
+          <input type="range" id="slider-transparency" min="10" max="100" value="70" oninput="updateTransparency(this.value)">
+        </div>
+
+        <!-- Marrow Glow Intensity Slider -->
+        <div class="range-group">
+          <div class="range-label">
+            <span>Marrow Depth Illumination</span>
+            <span id="val-glow">100%</span>
+          </div>
+          <input type="range" id="slider-glow" min="20" max="200" value="100" oninput="updateGlow(this.value)">
+        </div>
+      </div>
+
+      <!-- Quick Focus Hotspots -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span>Anatomical Regions</span>
+          <i data-lucide="crosshair" style="width: 16px; height: 16px;"></i>
+        </div>
+        <div class="hotspot-list">
+          <button class="hotspot-btn active" id="hs-all" onclick="selectHotspot('all')">
+            <span>Full Body Overview</span>
+            <span class="tag">Global</span>
+          </button>
+          <button class="hotspot-btn" id="hs-cranium" onclick="selectHotspot('cranium')">
+            <span>Skull Marrow & Brain</span>
+            <span class="tag">Axial</span>
+          </button>
+          <button class="hotspot-btn" id="hs-spine" onclick="selectHotspot('spine')">
+            <span>Vertebral Canal & Cord</span>
+            <span class="tag">Axial</span>
+          </button>
+          <button class="hotspot-btn" id="hs-sternum" onclick="selectHotspot('sternum')">
+            <span>Ribcage & Sternum</span>
+            <span class="tag">Thoracic</span>
+          </button>
+          <button class="hotspot-btn" id="hs-pelvis" onclick="selectHotspot('pelvis')">
+            <span>Pelvic Cancellous Bone</span>
+            <span class="tag">Iliac</span>
+          </button>
+          <button class="hotspot-btn" id="hs-femur" onclick="selectHotspot('femur')">
+            <span>Femoral & Tibial Cavities</span>
+            <span class="tag">Appendicular</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Render Mode Selector -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span>Render Mode</span>
+          <i data-lucide="sliders" style="width: 16px; height: 16px;"></i>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="badge" id="rm-natural" style="cursor: pointer; background: rgba(255,255,255,0.1);" onclick="setRenderMode('natural')">Realistic 3D</button>
+          <button class="badge" id="rm-marrow-focus" style="cursor: pointer;" onclick="setRenderMode('marrow-focus')">Marrow Focus</button>
+          <button class="badge" id="rm-xray" style="cursor: pointer;" onclick="setRenderMode('xray')">X-Ray Depth</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Central Viewport: Dynamic 3D Canvas -->
+    <main class="viewport-container" id="viewport">
+      <canvas id="canvas-visualizer"></canvas>
+
+      <!-- Floating Canvas HUD Controls -->
+      <div class="viewport-hud">
+        <button class="hud-btn" onclick="zoomIn()" title="Zoom In"><i data-lucide="zoom-in"></i></button>
+        <button class="hud-btn" onclick="zoomOut()" title="Zoom Out"><i data-lucide="zoom-out"></i></button>
+        <button class="hud-btn" onclick="resetView()" title="Reset View"><i data-lucide="refresh-cw"></i></button>
+        <div class="hud-divider"></div>
+        <button class="hud-btn" onclick="toggleComparisonMode()" title="Split Comparison View"><i data-lucide="columns"></i></button>
+        <button class="hud-btn" onclick="toggleFullscreen()" title="Fullscreen"><i data-lucide="maximize-2"></i></button>
+      </div>
+
+      <!-- Dynamic Hover Tooltip -->
+      <div id="tooltip" class="tooltip"></div>
+    </main>
+
+    <!-- Right Sidebar: Clinical & Ayurvedic Deep Dive -->
+    <aside class="sidebar-right">
+      <div class="detail-header">
+        <span class="detail-tag" id="detail-category">Ayurvedic & Medical Anatomy</span>
+        <h2 class="detail-title" id="detail-title">Majja Dhatu (Bone Marrow)</h2>
+        <p class="detail-subtitle" id="detail-subtitle">The 6th Primary Dhatu — Bone Marrow & Integrated Neural Matrix</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tab-group">
+        <button class="tab-btn active" id="tab-ayurveda" onclick="setTab('ayurveda')">Ayurvedic Concept</button>
+        <button class="tab-btn" id="tab-medical" onclick="setTab('medical')">Medical Science</button>
+        <button class="tab-btn" id="tab-histology" onclick="setTab('histology')">Histology</button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div id="tab-content">
+        <!-- Default Content loaded via JS -->
+      </div>
+    </aside>
+
+    <!-- Footer Status Bar -->
+    <footer>
+      <div class="footer-status">
+        <span class="status-indicator"></span>
+        <span>High-Definition 3D Anatomical Render Active — 60 FPS</span>
+      </div>
+      <div>
+        <span>Orientation: <strong id="lbl-orientation" style="color: var(--bone-ivory);">Anterior (Front View)</strong></span>
+        <span style="margin: 0 8px;">|</span>
+        <span>Marrow Density: <strong style="color: var(--marrow-crimson);">Active Red Marrow (Axial Skeleton)</strong></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

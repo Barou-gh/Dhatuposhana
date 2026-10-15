@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive 3D Medical Visualization of Meda Dhatu (Adipose/Fat Tissue System) in Ayurveda Anatomy. Explore Subcutaneous and Visceral Adipose Tissue, Musculoskeletal Integration, and Adipocyte Lobules in high fidelity.">
+  <title>Meda Dhatu (Adipose System) - Interactive 3D Medical Anatomy</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-viewport">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand-container">
+        <div class="brand-badge">मेदस्</div>
+        <div>
+          <h1 class="brand-title">MEDA DHATU 3D</h1>
+          <div class="brand-subtitle">Interactive Adipose Tissue Medical Explorer</div>
+        </div>
+      </div>
+
+      <nav class="header-nav">
+        <div class="nav-pill active" id="btn-mode-explorer">
+          <span class="dot"></span>
+          <span>3D Anatomical Explorer</span>
+        </div>
+        <div class="nav-pill" id="btn-mode-physiology">
+          <i data-lucide="book-open"></i>
+          <span>Ayurvedic Physiology</span>
+        </div>
+        <div class="nav-pill" id="btn-mode-clinical">
+          <i data-lucide="activity"></i>
+          <span>Clinical Correlation</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-container">
+      
+      <!-- LEFT SIDEBAR: Layer & Region Controls -->
+      <aside class="glass-panel sidebar-left" aria-label="Anatomical Controls">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <i data-lucide="layers"></i> View & Layer Filter
+          </h2>
+          <span class="badge">3D Specimen</span>
+        </div>
+
+        <!-- Front/Back Orientation Switcher -->
+        <div class="control-group">
+          <label class="control-label">Anatomical Orientation</label>
+          <div class="view-switcher" role="radiogroup" aria-label="View Orientation">
+            <button class="switch-btn active" id="btn-view-front" role="radio" aria-checked="true">
+              <i data-lucide="user"></i> Front View
+            </button>
+            <button class="switch-btn" id="btn-view-back" role="radio" aria-checked="false">
+              <i data-lucide="user-check"></i> Back View
+            </button>
+          </div>
+        </div>
+
+        <!-- Layer Spotlight Modes -->
+        <div class="control-group">
+          <label class="control-label">Anatomical Layer Spotlight</label>
+          <div class="layer-list" id="layer-selector-list">
+            <div class="layer-card active" data-layer="all">
+              <div class="layer-info">
+                <div class="layer-icon-badge" style="background: rgba(255, 183, 3, 0.2); color: #ffb703;">
+                  <i data-lucide="eye"></i>
+                </div>
+                <div>
+                  <div class="layer-name">Integrated System</div>
+                  <div class="layer-desc">Full 3D anatomical integration</div>
+                </div>
+              </div>
+              <i data-lucide="check" class="check-icon"></i>
+            </div>
+
+            <div class="layer-card" data-layer="subcutaneous">
+              <div class="layer-info">
+                <div class="layer-icon-badge" style="background: rgba(251, 133, 0, 0.2); color: #fb8500;">
+                  <i data-lucide="shield"></i>
+                </div>
+                <div>
+                  <div class="layer-name">Subcutaneous Fat</div>
+                  <div class="layer-desc">Bahya Meda lobular layer</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="layer-card" data-layer="visceral">
+              <div class="layer-info">
+                <div class="layer-icon-badge" style="background: rgba(42, 157, 143, 0.2); color: #2a9d8f;">
+                  <i data-lucide="circle-dot"></i>
+                </div>
+                <div>
+                  <div class="layer-name">Visceral Fat</div>
+                  <div class="layer-desc">Antar Meda around abdominal organs</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="layer-card" data-layer="muscular">
+              <div class="layer-info">
+                <div class="layer-icon-badge" style="background: rgba(230, 57, 70, 0.2); color: #e63946;">
+                  <i data-lucide="zap"></i>
+                </div>
+                <div>
+                  <div class="layer-name">Musculoskeletal Base</div>
+                  <div class="layer-desc">Mamsa & Asthi Dhatu integration</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regional Hotspot Focus -->
+        <div class="control-group">
+          <label class="control-label">Target Body Region</label>
+          <div class="region-list" id="region-selector-list">
+            <button class="region-btn active" data-region="all">
+              <span>All Body Regions</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+            <button class="region-btn" data-region="facial">
+              <span>Facial & Cervical Adipose</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+            <button class="region-btn" data-region="visceral">
+              <span>Abdominal Visceral (Omentum)</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+            <button class="region-btn" data-region="pelvic">
+              <span>Gluteal & Pelvic Adipose</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+            <button class="region-btn" data-region="femoral">
+              <span>Femoral & Quadriceps Layer</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+            <button class="region-btn" data-region="calves">
+              <span>Posterior Calf & Ankle Fat</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- CENTER: 3D Anatomical Viewer Canvas -->
+      <section class="viewer-container" id="anatomical-viewer" aria-label="3D Anatomical Specimen Viewport">
+        <!-- HUD Grid Background -->
+        <div class="hud-overlay"></div>
+        <div class="hud-corner hud-tl"></div>
+        <div class="hud-corner hud-tr"></div>
+        <div class="hud-corner hud-bl"></div>
+        <div class="hud-corner hud-br"></div>
+        
+        <!-- Laser Scan Effect -->
+        <div class="scan-line" id="medical-scanner"></div>
+
+        <!-- Render Container -->
+        <div class="render-wrapper" id="render-wrapper">
+          <img 
+            id="specimen-img" 
+            src="assets/meda_front_3d.jpg" 
+            alt="Photorealistic 3D Specimen of Meda Dhatu (Adipose Tissue System)" 
+            class="render-img"
+          >
+
+          <!-- Dynamic Interactive Hotspots Container -->
+          <div class="hotspot-overlay" id="hotspots-container">
+            <!-- Front View Hotspots will be rendered here dynamically -->
+          </div>
+        </div>
+
+        <!-- Zoom Loupe Magnifier Glass -->
+        <div class="loupe-tool" id="magnifier-loupe">
+          <div class="loupe-content" id="loupe-bg"></div>
+        </div>
+
+        <!-- Floating Viewer Toolbar -->
+        <div class="viewer-controls">
+          <button class="tool-btn" id="tool-scan" title="Toggle Medical Scan Line">
+            <i data-lucide="scan"></i>
+          </button>
+          <button class="tool-btn" id="tool-loupe" title="Toggle Adipocyte Magnifier Loupe">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="tool-btn" id="tool-reset" title="Reset View & Zoom">
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+          <button class="tool-btn" id="tool-fullscreen" title="Full Focus View">
+            <i data-lucide="maximize-2"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- RIGHT SIDEBAR: Educational & Diagnostic Panel -->
+      <aside class="glass-panel sidebar-right" aria-label="Anatomical Information & Details">
+        <div class="panel-header">
+          <h2 class="panel-title" id="info-panel-title">
+            <i data-lucide="info"></i> Meda Dhatu Overview
+          </h2>
+          <span class="badge" id="info-panel-tag">Ayurveda Science</span>
+        </div>
+
+        <!-- Dynamic Content Card -->
+        <div class="info-card" id="primary-info-card">
+          <div class="info-title">
+            <i data-lucide="activity"></i> <span id="card-region-title">Adipose Tissue System (Meda)</span>
+          </div>
+          <p class="info-body" id="card-region-body">
+            In Ayurvedic medicine, <strong>Meda Dhatu</strong> represents the lipid and adipose tissue system responsible for bodily lubrication (<em>Snehana</em>), thermal insulation, energy storage, and physical cushioning for internal organs and skeletal structures.
+          </p>
+        </div>
+
+        <!-- Metric Statistics Grid -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-value" id="stat-density">18-24%</span>
+            <span class="stat-label">Normal Mass Index</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="stat-element">Jala + Prithvi</span>
+            <span class="stat-label">Mahabhuta Dominance</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="stat-upadhatu">Snayu & Vasa</span>
+            <span class="stat-label">Associated Upadhatu</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="stat-mala">Sveda (Sweat)</span>
+            <span class="stat-label">Metabolic Waste</span>
+          </div>
+        </div>
+
+        <!-- Tabbed Information -->
+        <div class="tabs-container">
+          <button class="tab-btn active" data-tab="physiology">Physiology</button>
+          <button class="tab-btn" data-tab="lobules">Adipocyte Detail</button>
+          <button class="tab-btn" data-tab="clinical">Clinical State</button>
+        </div>
+
+        <!-- Tab 1: Physiology -->
+        <div class="tab-content active" id="tab-physiology">
+          <div class="info-card">
+            <div class="info-title"><i data-lucide="sparkles"></i> Primary Functions (Karma)</div>
+            <ul style="font-size: 0.8rem; color: var(--text-muted); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem;">
+              <li><strong>Snehana:</strong> Provides systemic unctuousness and joint lubrication.</li>
+              <li><strong>Dharana:</strong> Gives shape, firmness, and structural padding to muscles.</li>
+              <li><strong>Sveda Utpatti:</strong> Regulates body temperature via thermogenesis and perspiration.</li>
+              <li><strong>Asthi Poshana:</strong> Serves as the precursor tissue nourishment for Asthi Dhatu (bone).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tab 2: Adipocyte Detail -->
+        <div class="tab-content" id="tab-lobules">
+          <div class="info-card">
+            <div class="info-title"><i data-lucide="microscope"></i> Microscopic Adipose Lobules</div>
+            <p class="info-body">
+              Subcutaneous fat is organized into distinct <strong>adipose lobules</strong> separated by fibrous connective tissue septa. Adipocytes store triacylglycerols in large lipid droplets, imparting a golden-yellow hue due to naturally dissolved carotenoids.
+            </p>
+            <div class="badge-group" style="margin-top: 0.4rem;">
+              <span class="badge">Lobulated Septa</span>
+              <span class="badge">Subsurface Scattering</span>
+              <span class="badge">Warm Amber Lipid Droplets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Clinical State -->
+        <div class="tab-content" id="tab-clinical">
+          <div class="info-card">
+            <div class="info-title"><i data-lucide="heart-pulse"></i> Pathological States</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
+              <div style="background: rgba(230, 57, 70, 0.1); padding: 8px; border-radius: 6px; border-left: 3px solid var(--accent-ruby);">
+                <strong style="color: var(--text-main);">Meda Vriddhi (Hyper-adiposity):</strong> Excessive accumulation causing breathlessness, lethargy, flaccidity, and metabolic imbalance (Stholya / Obesity).
+              </div>
+              <div style="background: rgba(42, 157, 143, 0.1); padding: 8px; border-radius: 6px; border-left: 3px solid var(--accent-cyan);">
+                <strong style="color: var(--text-main);">Meda Kshaya (Depletion):</strong> Loss of subcutaneous cushion, joint stiffness, dryness of skin and eyes, splenic enlargement, and rib prominence.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </main>
+
+    <!-- Bottom Status Bar -->
+    <footer class="status-bar">
+      <div class="status-item">
+        <span class="status-dot"></span>
+        <span>Specimen Render: High-Resolution 3D Octane Engine Asset Active</span>
+      </div>
+      <div class="status-item">
+        <span>Ayurveda Dhatu Science Edition • Interactive Web Application</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

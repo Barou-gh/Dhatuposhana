@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 DHATUS — Interactive Ayurvedic Anatomy Visualization</title>
+    <meta name="description" content="Explore the seven fundamental Dhatus through interactive anatomical visualizations inspired by traditional Ayurvedic concepts and modern scientific design.">
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- ======================================================================
+         TOP NAVIGATION BAR
+         ====================================================================== -->
+    <header class="site-header" id="navbar">
+        <div class="container nav-wrapper">
+            <!-- Brand Logo -->
+            <a href="#hero" class="logo-brand" aria-label="7 Dhatus Home">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <circle cx="12" cy="12" r="4" fill="#00e5ff" fill-opacity="0.8"/>
+                        <path d="M12 2V6M12 18V22M2 12H6M18 12H22" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-title">7 DHATUS</span>
+                    <span class="logo-subtitle">Ayurvedic Anatomy</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#atlas" class="nav-link">7 Dhatus</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right CTA Button -->
+            <a href="#atlas" class="nav-cta-btn">
+                <span>Start Exploring</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <a href="#hero">Home</a>
+        <a href="#atlas">7 Dhatus</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About</a>
+        <a href="#atlas" class="text-cyan font-bold" style="margin-top: 8px;">Start Exploring &rarr;</a>
+    </div>
+
+    <!-- ======================================================================
+         HERO SECTION
+         ====================================================================== -->
+    <section class="hero-section" id="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="container hero-grid">
+            <!-- Left Content Column -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse-dot" aria-hidden="true"></span>
+                    <span>AYURVEDIC ANATOMY</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Explore the<br>
+                    <span class="text-gradient">7 Dhatus</span>
+                </h1>
+
+                <p class="hero-description">
+                    An interactive visual journey through the seven fundamental Dhatus described in Ayurveda. Explore the seven Dhatus through interactive anatomical visualizations inspired by traditional Ayurvedic concepts.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#atlas" class="btn btn-primary" id="hero-btn-explore">
+                        <span>START EXPLORING</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#about" class="btn btn-secondary" id="hero-btn-about">
+                        <span>LEARN ABOUT 7 DHATUS</span>
+                    </a>
+                </div>
+
+                <div class="hero-specs">
+                    <div class="spec-item">
+                        <span class="spec-val">07</span>
+                        <span class="spec-label">Tissue Systems</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-val">3D</span>
+                        <span class="spec-label">Dual View Mode</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-val">100%</span>
+                        <span class="spec-label">Interactive Platform</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Anatomical Viewport Column -->
+            <div class="hero-visual-wrapper">
+                <div class="anatomy-viewport">
+                    <!-- HUD / Technical Reticle Layer -->
+                    <div class="viewport-reticle">
+                        <div class="corner-marker corner-tl"></div>
+                        <div class="corner-marker corner-tr"></div>
+                        <div class="corner-marker corner-bl"></div>
+                        <div class="corner-marker corner-br"></div>
+                    </div>
+
+                    <div class="viewport-coords">
+                        <span>SCAN // ANATOMIC_V3</span>
+                        <span>RES // HIGH_FIDELITY</span>
+                    </div>
+
+                    <div class="viewport-mode-tag">
+                        <span>INTERACTIVE ATLAS</span>
+                    </div>
+
+                    <!-- Anatomical Silhouette / Model (Asthi Bone Structure Baseline) -->
+                    <img src="./Asthi/asthi_dhatu_front.png" alt="Ayurvedic Human Anatomical Visualization" class="anatomy-silhouette">
+
+                    <!-- Floating HUD Markers -->
+                    <div class="hud-card hud-card-left">
+                        <span class="hud-label">VITAL MATRIX</span>
+                        <div class="hud-value">
+                            <span class="hud-dot dot-cyan"></span>
+                            <span>Rasa &amp; Rakta Flow</span>
+                        </div>
+                    </div>
+
+                    <div class="hud-card hud-card-right">
+                        <span class="hud-label">STRUCTURAL CORE</span>
+                        <div class="hud-value">
+                            <span class="hud-dot dot-purple"></span>
+                            <span>Asthi &amp; Majja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         FEATURE SECTION
+         ====================================================================== -->
+    <section class="section-spacing" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">PLATFORM CAPABILITIES</span>
+                <h2 class="section-title">Explore Interactive Anatomy</h2>
+                <p class="section-subtitle">
+                    Purpose-built digital suite designed to study traditional Ayurvedic tissue concepts through modern anatomical interfaces.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1: Visual Anatomy -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div class="feature-number">FEATURE // 01</div>
+                    <h3 class="feature-title">VISUAL ANATOMY</h3>
+                    <p class="feature-desc">Explore anatomical representations of each Dhatu.</p>
+                </div>
+
+                <!-- Feature 2: Front & Back Views -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                            <path d="M21 3v5h-5"></path>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                            <path d="M3 21v-5h5"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-number">FEATURE // 02</div>
+                    <h3 class="feature-title">FRONT &amp; BACK VIEWS</h3>
+                    <p class="feature-desc">Study anatomical structures from multiple views.</p>
+                </div>
+
+                <!-- Feature 3: Interactive Visualization -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="22" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="12" x2="2" y2="12"></line>
+                            <line x1="12" y1="6" x2="12" y2="2"></line>
+                            <line x1="12" y1="22" x2="12" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-number">FEATURE // 03</div>
+                    <h3 class="feature-title">INTERACTIVE VISUALIZATION</h3>
+                    <p class="feature-desc">Zoom, pan, rotate where supported, and explore each Dhatu individually.</p>
+                </div>
+
+                <!-- Feature 4: Educational Information -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path>
+                            <path d="M6 6h10"></path>
+                            <path d="M6 10h10"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-number">FEATURE // 04</div>
+                    <h3 class="feature-title">EDUCATIONAL INFORMATION</h3>
+                    <p class="feature-desc">Learn the traditional Ayurvedic description and visual representation of each Dhatu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         MAIN DHATU ATLAS SECTION (FLAGSHIP)
+         ====================================================================== -->
+    <section class="section-spacing atlas-section" id="atlas">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">DHATU ATLAS</span>
+                <h2 class="section-title">Explore the 7 Dhatus</h2>
+                <p class="section-subtitle">Select a Dhatu to enter its interactive visualization.</p>
+            </div>
+
+            <!-- Atlas Filter Category Tabs -->
+            <div class="atlas-filter-bar" role="tablist" aria-label="Filter Dhatus">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All 7 Dhatus</button>
+                <button class="filter-btn" data-filter="fluid" role="tab" aria-selected="false">Nutrient &amp; Circulatory</button>
+                <button class="filter-btn" data-filter="structural" role="tab" aria-selected="false">Structural &amp; Skeletal</button>
+                <button class="filter-btn" data-filter="essence" role="tab" aria-selected="false">Deep Tissue &amp; Essence</button>
+            </div>
+
+            <!-- The 7 Dhatu Cards Grid -->
+            <div class="atlas-grid">
+
+                <!-- 01. RASA DHATU -->
+                <a href="./Rasa/index.html" class="atlas-card card-rasa" data-category="fluid" id="card-rasa">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">01</span>
+                        <span class="card-category-tag">Plasma &bull; Fluid</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Rasa/rasa_dhatu_front_3d.png" alt="Rasa Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">RASA</span>
+                            <span class="card-title-sanskrit">रस</span>
+                        </div>
+                        <div class="card-function-subtitle">Fluid / Nutrient Tissue</div>
+                        <p class="card-description">
+                            The primary circulating nutrient fluid that hydrates tissues, sustains vitality (Preenana), and provides continuous nourishment to all subsequent Dhatus.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 02. RAKTA DHATU -->
+                <a href="./Rakta/index.html" class="atlas-card card-rakta" data-category="fluid" id="card-rakta">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">02</span>
+                        <span class="card-category-tag">Blood &bull; Circulation</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Rakta/rakta_dhatu_front_3d.png" alt="Rakta Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">RAKTA</span>
+                            <span class="card-title-sanskrit">रक्त</span>
+                        </div>
+                        <div class="card-function-subtitle">Blood / Circulatory Representation</div>
+                        <p class="card-description">
+                            The life-sustaining red tissue (Jeevana) responsible for oxygenation, cellular vitality, complexion, and systemic thermal regulation.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 03. MAMSA DHATU -->
+                <a href="./Mamsa/index.html" class="atlas-card card-mamsa" data-category="structural" id="card-mamsa">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">03</span>
+                        <span class="card-category-tag">Muscle &bull; Form</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Mamsa/mamsa_dhatu_front_3d.jpg" alt="Mamsa Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">MAMSA</span>
+                            <span class="card-title-sanskrit">मांस</span>
+                        </div>
+                        <div class="card-function-subtitle">Muscle Tissue</div>
+                        <p class="card-description">
+                            The muscular framework that covers bones (Lepana), facilitates kinetic mobility, stabilizes joints, and maintains physical fortitude.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 04. MEDA DHATU -->
+                <a href="./Meda/index.html" class="atlas-card card-meda" data-category="structural" id="card-meda">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">04</span>
+                        <span class="card-category-tag">Adipose &bull; Lipid</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Meda/assets/meda_front_3d.jpg" alt="Meda Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">MEDA</span>
+                            <span class="card-title-sanskrit">मेद</span>
+                        </div>
+                        <div class="card-function-subtitle">Adipose / Fat Tissue</div>
+                        <p class="card-description">
+                            Adipose lipid tissue governing lubrication (Snehana), thermal insulation, structural cushioning, and nourishment of skeletal foundations.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 05. ASTHI DHATU -->
+                <a href="./Asthi/index.html" class="atlas-card card-asthi" data-category="structural" id="card-asthi">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">05</span>
+                        <span class="card-category-tag">Skeletal &bull; Bone</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Asthi/asthi_dhatu_front.png" alt="Asthi Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">ASTHI</span>
+                            <span class="card-title-sanskrit">अस्थि</span>
+                        </div>
+                        <div class="card-function-subtitle">Bone / Skeletal Representation</div>
+                        <p class="card-description">
+                            The rigid mineral framework providing structural support (Dharana), shielding vital organs, and forming the physical architecture of the body.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 06. MAJJA DHATU -->
+                <a href="./Majja/index.html" class="atlas-card card-majja" data-category="essence" id="card-majja">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">06</span>
+                        <span class="card-category-tag">Marrow &bull; Neuro</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Majja/assets/majja_front_view.png" alt="Majja Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">MAJJA</span>
+                            <span class="card-title-sanskrit">मज्जा</span>
+                        </div>
+                        <div class="card-function-subtitle">Marrow / Traditional Representation</div>
+                        <p class="card-description">
+                            The internal substance occupying bone cavities (Poorana), closely associated with neuro-endocrine signaling, cellular generation, and deep vitality.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 07. SHUKRA DHATU -->
+                <a href="./Shukra/index.html" class="atlas-card card-shukra" data-category="essence" id="card-shukra">
+                    <div class="card-header-bar">
+                        <span class="card-num-badge">07</span>
+                        <span class="card-category-tag">Reproductive &bull; Essence</span>
+                    </div>
+
+                    <div class="card-image-stage">
+                        <img src="./Shukra/assets/shukra_dhatu_front.png" alt="Shukra Dhatu Anatomical Visualization" class="card-dhatu-img" loading="lazy">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-name-row">
+                            <span class="card-title-latin">SHUKRA</span>
+                            <span class="card-title-sanskrit">शुक्र</span>
+                        </div>
+                        <div class="card-function-subtitle">Reproductive Tissue / Essence</div>
+                        <p class="card-description">
+                            The ultimate refined tissue responsible for regeneration, reproductive capacity (Garbhotpadana), holistic radiance, and the synthesis of Ojas.
+                        </p>
+                        <div class="card-action-bar">
+                            <span class="action-label">
+                                <span>Explore Dhatu</span>
+                                <span class="action-arrow">&rarr;</span>
+                            </span>
+                            <span class="card-view-badge">Interactive 3D</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         DHATU METABOLIC SEQUENCE (PARINAMA FLOW STRIP)
+         ====================================================================== -->
+    <div class="parinama-section" aria-label="Dhatu Parinama Sequential Progression">
+        <div class="container">
+            <div class="parinama-header">
+                <h3>Dhatu Parinama: Sequential Tissue Transformation</h3>
+                <p>Classical Ayurvedic concept describing progressive metabolic refinement from nutrient plasma to reproductive essence.</p>
+            </div>
+
+            <div class="parinama-flow">
+                <div class="flow-node">
+                    <span class="flow-node-index">01</span>
+                    <span class="flow-node-sanskrit">रस</span>
+                    <span class="flow-node-name">Rasa</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">02</span>
+                    <span class="flow-node-sanskrit">रक्त</span>
+                    <span class="flow-node-name">Rakta</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">03</span>
+                    <span class="flow-node-sanskrit">मांस</span>
+                    <span class="flow-node-name">Mamsa</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">04</span>
+                    <span class="flow-node-sanskrit">मेद</span>
+                    <span class="flow-node-name">Meda</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">05</span>
+                    <span class="flow-node-sanskrit">अस्थि</span>
+                    <span class="flow-node-name">Asthi</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">06</span>
+                    <span class="flow-node-sanskrit">मज्जा</span>
+                    <span class="flow-node-name">Majja</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node">
+                    <span class="flow-node-index">07</span>
+                    <span class="flow-node-sanskrit">शुक्र</span>
+                    <span class="flow-node-name">Shukra</span>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+
+                <div class="flow-node" style="border-color: rgba(0, 229, 255, 0.4);">
+                    <span class="flow-node-index" style="color: var(--brand-cyan);">OJAS</span>
+                    <span class="flow-node-sanskrit" style="color: var(--brand-cyan);">ओजस्</span>
+                    <span class="flow-node-name" style="color: #ffffff;">Vital Essence</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         HOW IT WORKS SECTION
+         ====================================================================== -->
+    <section class="section-spacing" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">WORKFLOW</span>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">
+                    A streamlined, three-step methodology to navigate and inspect each Ayurvedic anatomical layer.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">SELECT</h3>
+                    <p class="step-desc">
+                        Choose one of the seven Dhatus from the interactive atlas based on tissue type or physiological interest.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">EXPLORE</h3>
+                    <p class="step-desc">
+                        Open its dedicated interactive anatomy viewer loaded with multi-dimensional rendered assets and specialized tooling.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">LEARN</h3>
+                    <p class="step-desc">
+                        Explore front/back views, visual layers, animations and educational information correlating classical insights with structure.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         ABOUT SECTION
+         ====================================================================== -->
+    <section class="section-spacing" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-label">THEORETICAL FOUNDATION</span>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 24px;">Understanding the 7 Dhatus</h2>
+                    <p>
+                        In classical Ayurveda, human physiology is sustained by three doshas, seven dhatus, and three malas. The word <em>Dhatu</em> originates from the Sanskrit root <em>Dhā</em> (धा), meaning "to sustain, support, or nourish."
+                    </p>
+                    <p>
+                        Each Dhatu represents both a structural tissue stratum and a functional metabolic phase, transforming in succession from nutrient fluid (Rasa) down to reproductive essence (Shukra), culminating in pure constitutional resilience known as Ojas.
+                    </p>
+
+                    <!-- Scientific & Educational Notice Banner -->
+                    <div class="disclaimer-box">
+                        <div class="disclaimer-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <span>Educational &amp; Methodological Notice</span>
+                        </div>
+                        <p class="disclaimer-text">
+                            This project provides a digital educational visualization correlating classical Ayurvedic physiological philosophies with high-fidelity visual anatomical models. Traditional Ayurvedic concepts are distinct from modern biomedical histology, cellular pathology, and macroscopic anatomy. They are presented here for historical, cultural, and comparative academic exploration without asserting equivalence to modern empirical medical sciences.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about-highlights">
+                    <div class="about-card-stat">
+                        <div class="stat-icon">&#x25C8;</div>
+                        <h4 class="stat-title">Holistic Stratification</h4>
+                        <p class="stat-desc">Seven interdependent tissue layers supporting vitality and physical structural continuity.</p>
+                    </div>
+
+                    <div class="about-card-stat">
+                        <div class="stat-icon">&#x29BF;</div>
+                        <h4 class="stat-title">Dual Anatomical Perspectives</h4>
+                        <p class="stat-desc">High-precision anterior (front) and posterior (back) viewpoints for every tissue module.</p>
+                    </div>
+
+                    <div class="about-card-stat">
+                        <div class="stat-icon">&#x2637;</div>
+                        <h4 class="stat-title">Nutritional Cascade</h4>
+                        <p class="stat-desc">Sequential Parinama transformation illustrating micro-nutrition and tissue genesis.</p>
+                    </div>
+
+                    <div class="about-card-stat">
+                        <div class="stat-icon">&#x2726;</div>
+                        <h4 class="stat-title">Interactive Tooling</h4>
+                        <p class="stat-desc">Zero-dependency lightweight visual platform accessible directly in any modern web browser.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         FINAL CALL TO ACTION SECTION
+         ====================================================================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <span class="section-label">START YOUR JOURNEY</span>
+                <h2 class="cta-title">Begin Your Exploration</h2>
+                <p class="cta-subtitle">
+                    Choose a Dhatu and enter the interactive anatomical visualization to examine detailed models, anatomical landmarks, and Ayurvedic descriptions.
+                </p>
+                <a href="#atlas" class="btn btn-primary" id="cta-btn-explore">
+                    <span>EXPLORE 7 DHATUS</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         FOOTER
+         ====================================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <!-- Column 1: Brand -->
+                <div>
+                    <div class="logo-brand" style="margin-bottom: 16px;">
+                        <div class="logo-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="9" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                <circle cx="12" cy="12" r="4" fill="#00e5ff"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="footer-brand-title">7 DHATUS</span>
+                        </div>
+                    </div>
+                    <p class="footer-brand-desc">
+                        Interactive Ayurvedic Anatomy Visualization platform correlating traditional bodily tissues with digital 3D anatomical models.
+                    </p>
+                </div>
+
+                <!-- Column 2: Navigation Links -->
+                <div>
+                    <div class="footer-heading">NAVIGATION</div>
+                    <ul class="footer-links">
+                        <li><a href="#hero" class="footer-link">Home</a></li>
+                        <li><a href="#atlas" class="footer-link">7 Dhatus</a></li>
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#how-it-works" class="footer-link">How It Works</a></li>
+                        <li><a href="#about" class="footer-link">About</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Direct Dhatu Launchers -->
+                <div>
+                    <div class="footer-heading">DHATU MODULES</div>
+                    <ul class="footer-links">
+                        <li><a href="./Rasa/index.html" class="footer-link">01. Rasa (रस)</a></li>
+                        <li><a href="./Rakta/index.html" class="footer-link">02. Rakta (रक्त)</a></li>
+                        <li><a href="./Mamsa/index.html" class="footer-link">03. Mamsa (मांस)</a></li>
+                        <li><a href="./Meda/index.html" class="footer-link">04. Meda (मेद)</a></li>
+                        <li><a href="./Asthi/index.html" class="footer-link">05. Asthi (अस्थि)</a></li>
+                        <li><a href="./Majja/index.html" class="footer-link">06. Majja (मज्जा)</a></li>
+                        <li><a href="./Shukra/index.html" class="footer-link">07. Shukra (शुक्र)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Quick Overview / Tags -->
+                <div>
+                    <div class="footer-heading">CATEGORIES</div>
+                    <div class="footer-dhatu-tags">
+                        <span class="footer-dhatu-tag">Preenana (Hydration)</span>
+                        <span class="footer-dhatu-tag">Jeevana (Circulation)</span>
+                        <span class="footer-dhatu-tag">Lepana (Covering)</span>
+                        <span class="footer-dhatu-tag">Snehana (Lubrication)</span>
+                        <span class="footer-dhatu-tag">Dharana (Structure)</span>
+                        <span class="footer-dhatu-tag">Poorana (Filling)</span>
+                        <span class="footer-dhatu-tag">Garbhotpadana (Reproduction)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Strip -->
+            <div class="footer-bottom">
+                <div>&copy; 2026 7 Dhatus. Interactive Ayurvedic Anatomy Visualization.</div>
+                <div>Educational Visual Anatomy Platform</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="home.js"></script>
+</body>
+</html>

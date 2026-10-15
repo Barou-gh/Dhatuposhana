@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakta Dhatu 3D Medical Visualization | Cardiovascular & Vascular System</title>
+    <meta name="description" content="High-precision 3D medical anatomical visualization of Rakta Dhatu (blood circulation & vascular system) with interactive volumetric analysis and Ayurvedic physiology.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header / Navigation Bar -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon crimson-pulse">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="#ff2a4b" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <circle cx="12" cy="12" r="4" fill="#ff1744"/>
+                        <path d="M12 3V6M12 18V21M3 12H6M18 12H21" stroke="#ff5252" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>RAKTA DHATU</h1>
+                    <span class="sub-title">3D CARDIOVASCULAR VISUALIZATION</span>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <div class="view-toggle-group">
+                    <button class="view-btn active" id="btn-front-view" data-view="front">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        Anterior (Front)
+                    </button>
+                    <button class="view-btn" id="btn-back-view" data-view="back">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 7v10"/></svg>
+                        Posterior (Back)
+                    </button>
+                </div>
+
+                <div class="mode-pills">
+                    <button class="mode-pill active" id="mode-all">Composite 3D</button>
+                    <button class="mode-pill" id="mode-rakta">Vascular Network</button>
+                    <button class="mode-pill" id="mode-heart">Heart & Aorta</button>
+                    <button class="mode-pill" id="mode-skeleton">Skeleton</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Panel: Anatomical & Ayurvedic Parameters -->
+            <aside class="side-panel left-panel glass-panel">
+                <div class="panel-header">
+                    <h2>ANATOMICAL SPECS</h2>
+                    <span class="badge crimson-glow">Rakta Dhatu</span>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff2a4b" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    </div>
+                    <div class="spec-info">
+                        <label>Primary Substance</label>
+                        <p class="val">Red Blood Cells (Raktanu) & Hemoglobin</p>
+                    </div>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff2a4b" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <div class="spec-info">
+                        <label>Primary Organs (Sthana)</label>
+                        <p class="val">Yakrit (Liver), Pleeha (Spleen) & Raktavaha Dhamani</p>
+                    </div>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff2a4b" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="spec-info">
+                        <label>Primary Function (Karma)</label>
+                        <p class="val">Jeevana (Enlivening & Cellular Oxygenation)</p>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="panel-section">
+                    <h3>Sub-products (Upadhatu)</h3>
+                    <div class="tag-list">
+                        <span class="tag">Kandara (Tendons & Ligaments)</span>
+                        <span class="tag">Sira (Blood Vessels & Capillaries)</span>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Metabolic Waste (Mala)</h3>
+                    <div class="tag-list">
+                        <span class="tag warning-crimson">Pitta (Biliary Pigments & Bilirubin)</span>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Cardiovascular Dynamics</h3>
+                    <div class="meter-group">
+                        <div class="meter-label">
+                            <span>Vascular Oxygenation Index</span>
+                            <span class="meter-val" id="val-oxy">98.2%</span>
+                        </div>
+                        <div class="meter-bar"><div class="meter-fill crimson" id="bar-oxy" style="width: 98.2%;"></div></div>
+                    </div>
+                    <div class="meter-group">
+                        <div class="meter-label">
+                            <span>Arterial Flow Velocity</span>
+                            <span class="meter-val" id="val-flow">1.2 m/s</span>
+                        </div>
+                        <div class="meter-bar"><div class="meter-fill bright-red" id="bar-flow" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Stage: 3D Visualization Viewer -->
+            <section class="stage-container">
+                <div class="viewport-canvas-wrapper" id="viewport-wrapper">
+                    <!-- Particle Overlay Canvas for Blood Cell Circulation Simulation -->
+                    <canvas id="blood-particle-canvas"></canvas>
+
+                    <!-- Main 3D Model Image Container -->
+                    <div class="image-viewer-container" id="image-viewer">
+                        <img id="model-image-front" src="rakta_dhatu_front_3d.png" alt="Rakta Dhatu 3D Front View" class="model-img active">
+                        <img id="model-image-back" src="rakta_dhatu_back_3d.png" alt="Rakta Dhatu 3D Back View" class="model-img">
+
+                        <!-- Interactive Hotspot Pins for Front View -->
+                        <div class="hotspot front-hotspot" style="top: 24%; left: 51%;" data-title="Hridaya & Aortic Arch" data-desc="The central muscular pump propelling oxygenated blood through the aorta into systemic circulation.">
+                            <div class="pin crimson-heart-pulse"></div>
+                            <div class="hotspot-card">
+                                <h4>Hridaya (Cardiac Center)</h4>
+                                <p>Propels Rakta Dhatu throughout 10 primary arteries (Dasa Dhamani) for tissue enlivening.</p>
+                            </div>
+                        </div>
+
+                        <div class="hotspot front-hotspot" style="top: 10%; left: 50%;" data-title="Cephalic Vascular Mesh" data-desc="Carotid arteries and cerebral capillary network supplying oxygen and glucose to brain tissue.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Cerebral Circulation</h4>
+                                <p>High-density arterial network sustaining central nervous system vital functions.</p>
+                            </div>
+                        </div>
+
+                        <div class="hotspot front-hotspot" style="top: 40%; left: 44%;" data-title="Yakrit & Pleeha (Liver & Spleen)" data-desc="Primary seats of Rakta Dhatu formation (Raktadhara Kala) and erythrocyte maturation.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Yakrit & Pleeha Sthana</h4>
+                                <p>Hepatic and splenic seats where Ranjaka Pitta transforms Ahara Rasa into vibrant red blood.</p>
+                            </div>
+                        </div>
+
+                        <div class="hotspot front-hotspot" style="top: 58%; left: 43%;" data-title="Femoral Arterial Trunk" data-desc="Major arterial conduit delivering high-pressure blood flow down to lower extremities.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Femoral Vascular System</h4>
+                                <p>Primary arterial pathways supplying oxygenated blood to thigh and leg muscles.</p>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Hotspot Pins for Back View -->
+                        <div class="hotspot back-hotspot hidden" style="top: 26%; left: 50%;" data-title="Vertebral Venous Plexus" data-desc="Posterior spinal blood vessel plexus surrounding vertebrae and intercostal arteries.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Posterior Vertebral Plexus</h4>
+                                <p>Dense vascular network nourishing spinal cord, paravertebral muscles and ribs.</p>
+                            </div>
+                        </div>
+
+                        <div class="hotspot back-hotspot hidden" style="top: 21%; left: 40%;" data-title="Scapular Arterial Anastomosis" data-desc="Branching arterial network encircling the posterior scapula and shoulder girdle muscles.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Scapular Anastomosis</h4>
+                                <p>Rich vascular plexus supplying deep back muscles and upper limb joints.</p>
+                            </div>
+                        </div>
+
+                        <div class="hotspot back-hotspot hidden" style="top: 68%; left: 43%;" data-title="Popliteal & Sural Vessels" data-desc="Posterior knee and calf vascular network ensuring peripheral perfusion in lower extremities.">
+                            <div class="pin"></div>
+                            <div class="hotspot-card">
+                                <h4>Posterior Calf Circulation</h4>
+                                <p>Deep posterior tibial and sural blood vessels feeding lower leg tissues down to plantar arches.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay Controls / HUD -->
+                    <div class="viewport-hud">
+                        <div class="hud-top-left">
+                            <span class="status-dot live-crimson"></span>
+                            <span class="hud-text">RAKTA DHATU 3D SPECIMEN // PHOTOREALISTIC RENDER</span>
+                        </div>
+
+                        <div class="hud-controls">
+                            <button class="hud-btn" id="btn-pulse" title="Pulse Heartbeat Simulation">❤️</button>
+                            <button class="hud-btn" id="btn-zoom-in" title="Zoom In">+</button>
+                            <button class="hud-btn" id="btn-zoom-out" title="Zoom Out">−</button>
+                            <button class="hud-btn" id="btn-reset" title="Reset View">⟲</button>
+                            <button class="hud-btn active" id="btn-particles" title="Toggle Micro Blood Cells">🩸</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Clinical & Physiological Analysis -->
+            <aside class="side-panel right-panel glass-panel">
+                <div class="panel-header">
+                    <h2>CLINICAL ANALYSIS</h2>
+                    <span class="badge pulse-glow-red">Raktavaha Srotas</span>
+                </div>
+
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="normal">Sama (Optimal)</button>
+                    <button class="tab-btn" data-tab="kshaya">Kshaya (Depletion)</button>
+                    <button class="tab-btn" data-tab="vriddhi">Vriddhi (Excess)</button>
+                </div>
+
+                <div class="tab-content active" id="tab-normal">
+                    <div class="state-card success-crimson">
+                        <h3>Sama Rakta (Balanced Blood)</h3>
+                        <p>Radiant rosy complexion, warm skin temperature, optimal stamina, sharp sensory perception, and healthy tissue enlivening.</p>
+                    </div>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feat-icon-red">✓</span>
+                            <div>
+                                <strong>Jeevana (Vital Oxygenation)</strong>
+                                <p>Sustains cellular respiration and enlivens all bodily tissues (Dhatus).</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feat-icon-red">✓</span>
+                            <div>
+                                <strong>Varna Prasadana</strong>
+                                <p>Provides natural lustrous glow and ruddy complexion to skin and lips.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feat-icon-red">✓</span>
+                            <div>
+                                <strong>Mamsa Poshana</strong>
+                                <p>Provides essential substrate for conversion into Mamsa Dhatu (Muscle tissue).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-kshaya">
+                    <div class="state-card danger-crimson">
+                        <h3>Rakta Kshaya (Blood Depletion / Anemia)</h3>
+                        <p>Pallor of skin and mucous membranes, cold limbs, roughness, vein collapse, fatigue, and craving for acidic/sour foods.</p>
+                    </div>
+                    <ul class="symptom-list">
+                        <li><span>•</span> Pale skin, lips, and nail beds (Panduta)</li>
+                        <li><span>•</span> Collapse / flatness of blood vessels (Sirasithilata)</li>
+                        <li><span>•</span> Roughness and dryness of skin (Rukshata)</li>
+                        <li><span>•</span> Craving for sour & acidic tastes (Amla-prarthana)</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="tab-vriddhi">
+                    <div class="state-card warning-crimson">
+                        <h3>Rakta Vriddhi (Blood Excess / Hyperemia)</h3>
+                        <p>Redness of eyes & skin, burning sensation, hypertension, skin disorders (Visarpa, Kustha), and hemorrhagic tendencies.</p>
+                    </div>
+                    <ul class="symptom-list">
+                        <li><span>•</span> Redness of eyes and skin (Raktaksheta / Raktangata)</li>
+                        <li><span>•</span> Burning sensation in body (Daha)</li>
+                        <li><span>•</span> Bleeding tendencies & hemoptysis (Raktapitta)</li>
+                        <li><span>•</span> Inflammatory skin lesions & gout (Vatarakta)</li>
+                    </ul>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="panel-section">
+                    <h3>3D Material & Rendering Specs</h3>
+                    <div class="render-spec-grid">
+                        <div class="spec-box">
+                            <label>Vascular Subsurface</label>
+                            <span>Deep Crimson (650nm)</span>
+                        </div>
+                        <div class="spec-box">
+                            <label>Specular Reflection</label>
+                            <span>Wet Tissue Gloss 0.92</span>
+                        </div>
+                        <div class="spec-box">
+                            <label>Skeleton Material</label>
+                            <span>Ivory Cortical Surface</span>
+                        </div>
+                        <div class="spec-box">
+                            <label>Micro Circulation</label>
+                            <span>Luminous RBC Flow</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mamsa Dhatu (Muscular System) - 3D Medical Anatomical Visualization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header Bar -->
+        <header class="top-nav">
+            <div class="brand">
+                <span class="badge">Ayurveda Dhatu Visualizer</span>
+                <h1>MAMSA DHATU <span>| Muscle Tissue System</span></h1>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-outline" id="btnInfoModal">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    Ayurvedic Physiology
+                </button>
+                <button class="btn btn-primary" id="btnFullscreen">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                    Full Screen
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <div class="main-layout">
+            <!-- Left Sidebar Controls -->
+            <aside class="sidebar-left">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>View Orientation</h3>
+                    </div>
+                    <div class="panel-body view-selector">
+                        <button class="view-btn active" data-view="front">
+                            <span class="icon">🫀</span>
+                            <div class="text">
+                                <strong>Front View</strong>
+                                <small>Anterior Muscle Groups</small>
+                            </div>
+                        </button>
+                        <button class="view-btn" data-view="back">
+                            <span class="icon">🩸</span>
+                            <div class="text">
+                                <strong>Back View</strong>
+                                <small>Posterior Muscle Groups</small>
+                            </div>
+                        </button>
+                        <button class="view-btn" data-view="split">
+                            <span class="icon">⚖️</span>
+                            <div class="text">
+                                <strong>Dual View</strong>
+                                <small>Side-by-Side Comparison</small>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Visualization Modes</h3>
+                    </div>
+                    <div class="panel-body mode-toggles">
+                        <label class="toggle-option">
+                            <input type="checkbox" id="toggleFiberHighlight">
+                            <span class="custom-toggle"></span>
+                            <span class="label-text">Enhanced Fiber Texture</span>
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="toggleTendonHighlight">
+                            <span class="custom-toggle"></span>
+                            <span class="label-text">Tendon & Fascia Accent</span>
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="toggleHotspots" checked>
+                            <span class="custom-toggle"></span>
+                            <span class="label-text">Anatomical Hotspots</span>
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="toggleMagnifier">
+                            <span class="custom-toggle"></span>
+                            <span class="label-text">Microscope Fiber Lens</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Lighting & Shader Controls</h3>
+                    </div>
+                    <div class="panel-body slider-controls">
+                        <div class="control-group">
+                            <label>Contrast / Shadow Depth</label>
+                            <input type="range" id="contrastRange" min="80" max="150" value="115">
+                        </div>
+                        <div class="control-group">
+                            <label>Tissue Saturation</label>
+                            <input type="range" id="saturationRange" min="80" max="160" value="110">
+                        </div>
+                        <div class="control-group">
+                            <label>Cinematic Rim Light Glow</label>
+                            <input type="range" id="glowRange" min="0" max="100" value="40">
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Interactive Viewport -->
+            <main class="viewport-area" id="viewportArea">
+                <div class="viewport-container single-view" id="viewportContainer">
+                    <!-- Single View Mode -->
+                    <div class="render-frame" id="primaryFrame">
+                        <div class="magnifier-lens" id="magnifierLens"></div>
+                        <img src="mamsa_dhatu_front_3d.jpg" alt="Mamsa Dhatu 3D Front View" id="primaryImage" class="render-img">
+                        <div class="hotspots-layer" id="hotspotsLayer">
+                            <!-- Dynamic Hotspots populated by JS -->
+                        </div>
+                        <div class="view-tag" id="viewTag">ANTERIOR (FRONT VIEW)</div>
+                    </div>
+
+                    <!-- Split View Mode Frame (Hidden by default) -->
+                    <div class="render-frame split-secondary hidden" id="secondaryFrame">
+                        <img src="mamsa_dhatu_back_3d.jpg" alt="Mamsa Dhatu 3D Back View" class="render-img">
+                        <div class="view-tag">POSTERIOR (BACK VIEW)</div>
+                    </div>
+                </div>
+
+                <!-- Floating Canvas Controls -->
+                <div class="canvas-floating-toolbar">
+                    <button class="tool-btn" id="btnZoomIn" title="Zoom In">+</button>
+                    <button class="tool-btn" id="btnResetZoom" title="Reset Zoom">1:1</button>
+                    <button class="tool-btn" id="btnZoomOut" title="Zoom Out">-</button>
+                    <span class="separator"></span>
+                    <button class="tool-btn" id="btnToggleLighting" title="Toggle Cinematic Rim Light">💡 Light</button>
+                </div>
+            </main>
+
+            <!-- Right Sidebar: Selected Muscle Info & Ayurveda Context -->
+            <aside class="sidebar-right">
+                <div class="panel muscle-detail-panel" id="muscleDetailPanel">
+                    <div class="panel-header">
+                        <span class="category-badge">ANATOMICAL ANALYSIS</span>
+                        <h2 id="muscleTitle">Select Muscle Group</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p class="muscle-description" id="muscleDesc">
+                            Click on any anatomical hotspot on the 3D specimen to inspect deep muscle fiber orientation, origin/insertion points, and Ayurvedic Mamsa Dhatu functional dynamics.
+                        </p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <small>Tissue Layer</small>
+                                <strong id="statLayer">Superficial / Deep</strong>
+                            </div>
+                            <div class="stat-card">
+                                <small>Fiber Pattern</small>
+                                <strong id="statFiber">Parallel / Fusiform</strong>
+                            </div>
+                            <div class="stat-card">
+                                <small>Primary Action</small>
+                                <strong id="statAction">Flexion / Extension</strong>
+                            </div>
+                            <div class="stat-card">
+                                <small>Dhatu Sub-category</small>
+                                <strong id="statUpadhatu">Peshana (Muscular bundle)</strong>
+                            </div>
+                        </div>
+
+                        <div class="ayurveda-insight-box">
+                            <h4><span class="icon">📜</span> Ayurvedic Physiology (Mamsa)</h4>
+                            <p id="ayurvedaInsight">
+                                <strong>Lepana (Plastering/Covers):</strong> Mamsa Dhatu forms the structural muscular bulk that plaster-covers the skeletal matrix (Asthi Dhatu), preserving posture, organ stability, and locomotive power.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel dhatu-quick-ref">
+                    <div class="panel-header">
+                        <h3>Mamsa Dhatu Attributes</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="attribute-list">
+                            <li><strong>Mahabhuta:</strong> Prithvi (Earth) + Agni (Fire)</li>
+                            <li><strong>Karma (Function):</strong> Lepana (Covering/Form), Deha Dharna (Body Support)</li>
+                            <li><strong>Upadhatu (Secondary Tissue):</strong> Vasa (Fat tissue/Subcutaneous lipid) & Twak (Skin layers)</li>
+                            <li><strong>Mala (Waste Product):</strong> Khamala (Ear wax, nasal mucus, sebum)</li>
+                            <li><strong>Srotas:</strong> Mamsavaha Srotas (Rooted in Snayu, Twak, Raktavahi Dhamani)</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Information Modal -->
+    <div class="modal-overlay hidden" id="infoModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Mamsa Dhatu - Medical & Ayurvedic Science</h2>
+                <button class="btn-close" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>1. What is Mamsa Dhatu?</h3>
+                    <p>In Ayurveda, <em>Mamsa Dhatu</em> represents the muscular system—the third fundamental tissue of the human body. Formed from Rakta Dhatu (blood tissue) through the metabolic action of Mamsagni, Mamsa Dhatu provides physical strength, structural bulk, posture, and protective coverage over the skeletal frame (Asthi Dhatu).</p>
+                </div>
+                <div class="modal-section">
+                    <h3>2. Anatomical Composition & Realism</h3>
+                    <p>This 3D medical visualization models the volumetric, three-dimensional muscular anatomy with high fidelity:</p>
+                    <ul>
+                        <li><strong>Volumetric Muscle Groups:</strong> Distinct superficial and deep muscle layers attached to bone origin/insertion points.</li>
+                        <li><strong>Striated Fiber Orientation:</strong> Realistic biological fiber alignment converging into glistening tendons (Snayu).</li>
+                        <li><strong>Connective Tissue & Fascia:</strong> Pale cream tendons and subtle translucent fascia binding muscle belly bundles (Peshana).</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>3. Clinical & Physiological Functions (Karma)</h3>
+                    <p><strong>Lepana (Body Plastering):</strong> The muscle tissue envelops organs and bones, shielding vital centers (Marma) and providing contour.</p>
+                    <p><strong>Bala (Physical Strength):</strong> Optimal Mamsa Dhatu yields endurance, physical resistance, and joint stability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
